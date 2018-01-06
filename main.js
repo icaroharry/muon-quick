@@ -18,12 +18,23 @@ function createWindow () {
     width: 800, height: 600
   })
 
+  popup = new BrowserWindow({
+    title: 'popup',
+    width: 200, height: 200
+  })
+
+
   // and load brave.com
-  mainWindow.loadURL('https://www.brave.com')
+  mainWindow.loadURL('https://alpha.swapy.exchange')
+  //electron.componentUpdater.registerComponent('nkbihfbeogaeaoehlefnkodbefgpgknn', 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlcgI4VVL4JUvo6hlSgeCZp9mGltZrzFvc2Asqzb1dDGO9baoYOe+QRoh27/YyVXugxni480Q/R147INhBOyQZVMhZOD5pFMVutia9MHMaZhgRXzrK3BHtNSkKLL1c5mhutQNwiLqLtFkMSGvka91LoMEC8WTI0wi4tACnJ5FyFZQYzvtqy5sXo3VS3gzfOBluLKi7BxYcaUJjNrhOIxl1xL2qgK5lDrDOLKcbaurDiwqofVtAFOL5sM3uJ6D8nOO9tG+T7hoobRFN+nxk43PHgCv4poicOv+NMZQEk3da1m/xfuzXV88NcE/YRbRLwAS82m3gsJZKc6mLqm4wZHzBwIDAQAB')
 
   // alternatively, uncomment the following line to load index.html via
   // 'chrome://brave' to expose additional APIs such as 'chrome.ipcRenderer'
-  //mainWindow.loadURL('chrome://brave/' + __dirname + '/index.html');
+  // mainWindow.loadURL('chrome://brave/' + __dirname + '/index.html');
+
+  electron.session.defaultSession.extensions.load(path.join(__dirname,`extensions/metamask`), {}, 'unpacked');
+  //electron.session.defaultSession.extensions.enable('nkbihfbeogaeaoehlefnkodbefgpgknn');
+  popup.loadURL('chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/popup.html')
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools()
